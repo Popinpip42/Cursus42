@@ -10,10 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 void	*memcpy(void *dst, const void *src, size_t n)
 {
-	char	*aux_d;
-	char	*aux_s;
+	char		*aux_d;
+	const char	*aux_s;
 
 	aux_d = dst;
 	aux_s = src;

@@ -15,7 +15,7 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	while (*s1 == *s2 && --n)
+	while (*s1 == *s2 && --n && (*s1 || *s2))
 	{
 		s1++;
 		s2++;
@@ -25,9 +25,9 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 /*
 int	main(void)
 {
-	char	cade1[20] = "";
-	char	cade2[20] = "h";
-	printf("%d\n", ft_strncmp(cade1, cade2, 2));
-	printf("%d\n", strncmp(cade1, cade2, 2));
+	char	cade1[20] = "zyxbcdefgh";
+	char	cade2[20] = "abcdwxyz";
+	printf("%d\n", ft_strncmp(cade1, cade2, 0));
+	printf("%d\n", strncmp(cade1, cade2, 0));
 }
 */
