@@ -6,7 +6,7 @@
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:29:46 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/13 07:20:10 by lsirpa-g         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:23:28 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	ft_atoi(const char *str)
 	sign = 1;
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
-	if (*str == '+' || *str == '-')
-		str++;
 	if (*str == '-')
 		sign = -1;
+	if (*str == '+' || *str == '-')
+		str++;
 	num = 0;
 	while (*str >= '0' && *str <= '9')
 	{

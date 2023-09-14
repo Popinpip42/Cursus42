@@ -6,33 +6,37 @@
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:34:19 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/11 23:46:56 by lsirpa-g         ###   ########.fr       */
+/*   Updated: 2023/09/14 05:36:22 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 
-char	*strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
 	{
-		if (*s == (unsigned char)c)
-			return ((char *) s);
+		if (*s == (char) c)
+			return ((char *)s);
 		s++;
 	}
-	if (c == *s)
+	if (c == '\0')
+	{			
 		return ((char *) s);
+	}
 	return (NULL);
 }
 /*
 int	main(void)
 {
-	char	cade[20] = "Holaa";
+	char	cade[20] = "teste";
 	char	*aux;
-	aux = strchr(cade, '\0');
-	while (*aux != 'H')
+	aux = ft_strchr(cade, '\0');
+	while (aux >= cade)
 	{
 		write(1, &*aux, 1);
 		aux--;
 	}
-}*/
+}
+*/

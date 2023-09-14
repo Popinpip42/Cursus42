@@ -3,6 +3,8 @@ SRC = $(shell find . -name "*.c")
 OBJ = ${SRC:.c=.o}
 FLAGS = -Wall -Werror -Wextra 
 
+#include <stddef.h>
+
 all: ${NAME}
 
 objs:
