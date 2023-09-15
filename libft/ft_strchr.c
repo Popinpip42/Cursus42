@@ -15,24 +15,24 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (s == NULL)
+		return (NULL);
 	while (*s)
 	{
 		if (*s == (char) c)
 			return ((char *)s);
 		s++;
 	}
-	if (c == '\0')
-	{			
+	if ((char)c == '\0')
 		return ((char *) s);
-	}
 	return (NULL);
 }
 /*
 int	main(void)
 {
-	char	cade[20] = "teste";
+	char	cade[20] = "";
 	char	*aux;
-	aux = ft_strchr(cade, '\0');
+	aux = ft_strchr(cade, 'e');
 	while (aux >= cade)
 	{
 		write(1, &*aux, 1);
