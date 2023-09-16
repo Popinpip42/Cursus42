@@ -14,11 +14,11 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*arr;
+	char	*aux_s;
 
-	arr = (char *)s;
+	aux_s = s;
 	while (n--)
-		*arr++ = '\0';
+		*aux_s++ = '\0';
 }
 /*
 int	main(void)

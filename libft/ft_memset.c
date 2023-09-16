@@ -15,11 +15,11 @@
 
 void	*ft_memset(void *dest, int c, size_t len)
 {
-	char	*arr;
+	char	*aux_d;
 
-	arr = (char *)dest;
+	aux_d = (char *)dest;
 	while (len--)
-		*arr++ = (unsigned char) c;
+		*aux_d++ = (unsigned char) c;
 	return (dest);
 }
 /*
