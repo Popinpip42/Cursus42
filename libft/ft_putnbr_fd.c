@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include <unistd.h>
+#include <stdio.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*substr;
-	size_t	i;
+	char	num;
+	long	lnum;
 
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
+	lnum = n;
+	if (lnum < 0)
 	{
-		*substr = '\0';
-		return (substr);
+		lnum *= -1;
+		write(fd, "-", 1);
 	}
-	substr = (char *)malloc(len * sizeof(char) + 1);
-	if (!substr)
-		return (NULL);
-	i = 0;
-	while (i < len && s[start + i] != '\0')
-	{
-		substr[i] = s[start];
-		i++;
-	}
-	substr[i] = '\0';
-	return (substr);
+	num = lnum % 10 + '0';
+	if (lnum / 10 > 0)
+		ft_putnbr_fd(lnum / 10, fd);
+	write(fd, &num, 1);
 }
+/*
+int	main(void)
+{
+	ft_putnbr_fd(-1222, 1);
+}
+*/
