@@ -1,2 +1,2 @@
 # Cursus42
-Proyectos del cursus 42Madrid
+Libft cursus 42Madrid
