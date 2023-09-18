@@ -6,7 +6,7 @@
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:48:56 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/14 04:02:18 by lsirpa-g         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:55:18 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*aux;
+	const char	*end_pointer;
 
-	aux = s;
-	while (*s)
-		s++;
+	end_pointer = s;
+	while (*end_pointer)
+		end_pointer++;
 	if (c == '\0')
-		return ((char *)s);
+		return ((char *)end_pointer);
 	else
 	{
-		while (s >= aux)
+		while (s <= end_pointer)
 		{
-			if (*s == (char)c)
-				return ((char *) s);
-			s--;
+			if (*end_pointer == (char)c)
+				return ((char *) end_pointer);
+			end_pointer--;
 		}
 	}
 	return (NULL);

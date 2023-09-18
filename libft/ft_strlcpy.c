@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 10:29:46 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/14 00:23:28 by lsirpa-g         ###   ########.fr       */
+/*   Created: 2023/09/18 11:46:42 by lsirpa-g          #+#    #+#             */
+/*   Updated: 2023/09/18 14:10:57 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	int	len;
+	int		len;
+	size_t	i;
 
 	len = ft_strlen(src);
 	if (size == 0)
 		return (len);
-	while (--size && *src)
+	i = 0;
+	while (i < size - 1 && src[i])
 	{
-		*dst++ = *src++;
+		dst[i] = src[i];
+		i++;
 	}
-	*dst = '\0';
+	dst[i] = '\0';
 	return (len);
 }
