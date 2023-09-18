@@ -41,7 +41,7 @@ char	**ft_split(char const *s, char c)
 	//printf("%d\n", i);
 	return (matrix);
 }
-/*
+
 int	main(void)
 {
 	char	**matrix;
@@ -62,4 +62,4 @@ int	main(void)
 	}
 	free(matrix);
 	
-}*/
+}
