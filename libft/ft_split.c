@@ -6,7 +6,7 @@
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:43:48 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/18 14:17:38 by lsirpa-g         ###   ########.fr       */
+/*   Updated: 2023/09/19 05:33:02 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,33 @@ int	*measure_str_matrix(char **matrix);
 char	**realloc_str_matrix(char **matrix, size_t new_row_size)
 {
 	int	*measures = measure_str_matrix(matrix);
-	//printf("rows: %d, cols %d\n", measures[0], measures[1]);
-//--------------------
+	printf("rows: %d, cols %d\n", measures[0], measures[1]);
 	int numRows = measures[0];
-	int numCols = measures[1];
-	free(measures); // Free the memory used for measurements.
-	// Increase the number of rows by one.
+	//int numCols = measures[1];
+	free(measures);
 	numRows++;
-	printf("%d\n",numRows);
-	// Reallocate memory for the updated matrix.
+	//printf("%d\n",numRows);
 	matrix = (char **)realloc(matrix, (numRows + 1) * sizeof(char *));
 	if (!matrix)
 		return (NULL);
-	//WORKS UNTILHER---------------------------------------
-	
-	// Allocate memory for the new row with the specified size.
-	matrix[numRows - 1] = (char *)malloc((new_row_size + 1) * sizeof(char));
+	matrix[numRows - 1] = (char *)malloc(new_row_size * sizeof(char));
 	if (!matrix[numRows - 1])
 		return (NULL);
-
-	// Initialize the new row, e.g., set it to an empty string.
-	matrix[numRows - 1][0] = '\0';
-
-	return matrix;
-//--------------------
-
+	//matrix[numRows - 1][0] = '\0';
+	return (matrix);
 	//ToDo: Increase measures[0] + 1, 
 	//ToDo: Allocate size characters in the new row. (Have in mind the '\0' 
 	//return (NULL);
+}
+
+int	get_wsize_until(char const *str, char c)
+{
+	int	word_size;
+
+	word_size = 0;
+	while (str[word_size] != (char)c)
+		word_size++;
+	return (word_size);
 }
 
 char	**ft_split(char const *s, char c)
@@ -55,67 +54,80 @@ char	**ft_split(char const *s, char c)
 	char	**matrix;
 	int	word_size;
 
-	word_size = 0;
+	word_size = get_wsize_until(s, c);
 	rows = 0;
-	while (s[word_size] != (char)c && s[word_size] != '\0') 
-		word_size++;
 	if (word_size > 0)
 	{
 		matrix = (char **)malloc(rows * sizeof(char *));
-		*matrix = (char  *)malloc(word_size * sizeof(char) + 1);
+		*matrix = (char  *)malloc(word_size * sizeof(char) + 1);	
+		ft_strlcpy(matrix[0], s, word_size + 1);
 	}
+	s += word_size + 1;
+	int	i = 1;
+	word_size = 0;
+	while (*s)//If not null after the delimiter
+	{
+		//printf("word_szize : %d\n", word_size);
+		
+		if (*s == (char)c)	
+		{
+			matrix = realloc_str_matrix(matrix, word_size + 1);
+			ft_strlcpy(matrix[i], s - word_size, word_size + 1);
+			i ++;
+			word_size = 0;
+		}
+		else
+			word_size ++;
+		s ++;
+		
+		//printf("word_size: %d, current *s: %c, i: %d\n", word_size, *s, i);
+		/*if (*s == '\0')	
+		{	
+			matrix = realloc_str_matrix(matrix, word_size + 1);
+			ft_strlcpy(matrix[i], s - word_size, word_size + 2);
+		}*/
+	}
+	/*
+	word_size = 0;
+	while (*s != (char) c)
+	{
+		word_size ++;
+		s--;
+	}
+	printf("word_size: %d, current *s: %c, i: %d\n", word_size, *s, i);
+	matrix = realloc_str_matrix(matrix, word_size + 1);
+	ft_strlcpy(matrix[i + 1], s + 1, word_size + 1);
+	*/
 	//printf("%c\n", *(s + word_size));
-	ft_strlcpy(matrix[0], s, word_size + 1);
+	//matrix = realloc_str_matrix(matrix, word_size + 1);
 	//printf("%d\n", i);
 	return (matrix);
 }
-
+/*
 int	main(void)
 {
 	char	**matrix;
-	matrix = ft_split("hhpl a l a l a  ", 'l');
-	//printf("%s\n", matrix[0]);
-	int	size = 0;
-	while (matrix[0][size] != '\0')
+	matrix = ft_split("hhpl app l a l a", 'l');
+	int	i = 0;
+	while (matrix[i])
 	{
-		printf("%c, %p\n", matrix[0][size], &matrix[0][size]);
-		size++;
+		printf("%s\n", matrix[i]);
+		i++;
 	}
-	//printf("%d\n", size);
-	//Initial matrix measures
-	int	*measures = measure_str_matrix(matrix);
-	printf("rows: %d, cols %d\n", measures[0], measures[1]);
-
-	//Reallocated matrix measures
-	char	**new_matrix = realloc_str_matrix(matrix, 5);
-
-	int	*measures2 = measure_str_matrix(matrix);
-	printf("rows: %d, cols %d\n", measures2[0], measures2[1]);
-
-//-----------------------
-	size = 0;
-	while (matrix[size])
-	{
-		free(matrix[size]);
-		size++;
-	}
-	free(matrix);
-}
-
+}*/
+/**
+ * Calculates matrix number of rows and cols
+ */
 int	*measure_str_matrix(char **matrix)
 {
 	int	row_size = 0;
-	int	col_size;
+	int	col_size = 0;
 	while (matrix[row_size])
 	{
-		col_size = 0;
 		while (matrix[row_size][col_size] != '\0')
-		{
 			col_size++;
-		}
 		row_size++;
 	}
-	//printf("rows: %d, cols: %d\n", row_size, col_size);
 	int	*measures = (int *)malloc(2 * sizeof(int));
 	measures[0] = row_size;
 	measures[1] = col_size;
