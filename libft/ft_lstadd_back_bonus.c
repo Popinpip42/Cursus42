@@ -17,8 +17,11 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*current;
 
-	if (!lst)
+	if (*lst == NULL)
+	{
+		*lst = new;
 		return ;
+	}
 	current = *lst;
 	while (current->next != NULL)
 	{
@@ -49,7 +52,8 @@ int	main(void)
 	t_list	*node = lista_larga;
 	while (node != NULL)
 	{
-		printf("%s\n", node->content);
+		printf("%s\n", (char *)node->content);
 		node = node->next;
 	}
-}*/
+}
+*/
