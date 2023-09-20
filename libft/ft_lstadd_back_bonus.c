@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 13:31:25 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/19 14:03:49 by lsirpa-g         ###   ########.fr       */
+/*   Created: 2023/09/20 02:26:47 by lsirpa-g          #+#    #+#             */
+/*   Updated: 2023/09/20 06:18:46 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 	current->next = new;
 }
+/* while ((*lst)->next != NULL)
+		*lst = (*lst)->next;
+	(*lst)->next = new;*/
 /*
 int	main(void)
 {

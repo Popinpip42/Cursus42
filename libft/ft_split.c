@@ -6,7 +6,7 @@
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:43:48 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/19 05:33:02 by lsirpa-g         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:01:39 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ int	*measure_str_matrix(char **matrix);
 char	**realloc_str_matrix(char **matrix, size_t new_row_size)
 {
 	int	*measures = measure_str_matrix(matrix);
-	printf("rows: %d, cols %d\n", measures[0], measures[1]);
+	//printf("ARRIVING: rows: %d, cols %d\n", measures[0], measures[1]);
 	int numRows = measures[0];
 	//int numCols = measures[1];
 	free(measures);
 	numRows++;
+	//printf("rows++: rows: %d, cols %d\n", measures[0], measures[1]);
 	//printf("%d\n",numRows);
 	matrix = (char **)realloc(matrix, (numRows + 1) * sizeof(char *));
 	if (!matrix)
@@ -81,11 +82,11 @@ char	**ft_split(char const *s, char c)
 		s ++;
 		
 		//printf("word_size: %d, current *s: %c, i: %d\n", word_size, *s, i);
-		/*if (*s == '\0')	
+		if (*s == '\0')	
 		{	
 			matrix = realloc_str_matrix(matrix, word_size + 1);
 			ft_strlcpy(matrix[i], s - word_size, word_size + 2);
-		}*/
+		}
 	}
 	/*
 	word_size = 0;
@@ -115,20 +116,31 @@ int	main(void)
 		i++;
 	}
 }*/
-/**
- * Calculates matrix number of rows and cols
- */
+
 int	*measure_str_matrix(char **matrix)
 {
-	int	row_size = 0;
-	int	col_size = 0;
+	int	row_size;
+	int	col_size;
+	int	col;
+	int	*measures;
+
+	row_size = 0;
+	col_size = 0;
 	while (matrix[row_size])
 	{
-		while (matrix[row_size][col_size] != '\0')
+		col = 0;
+		while (matrix[row_size][col] != '\0')
+		{
 			col_size++;
+			col++;
+		}
 		row_size++;
 	}
-	int	*measures = (int *)malloc(2 * sizeof(int));
+	printf("OUTSIDE rows: %d, cols: %d\n", row_size, col_size);
+
+	measures = (int *)malloc(2 * sizeof(int));
+	if (!measures)
+		return (NULL);
 	measures[0] = row_size;
 	measures[1] = col_size;
 	return (measures);
