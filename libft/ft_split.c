@@ -6,7 +6,7 @@
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:43:48 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/21 03:25:41 by lsirpa-g         ###   ########.fr       */
+/*   Updated: 2023/09/22 06:46:11 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,20 @@ char	*get_word(char const *s, char c)
 	return (word);
 }
 
+char	**clean_matrix(char **matrix, int row)
+{
+	int	i;
+
+	i = 0;
+	while (i < row)
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**matrix;
@@ -74,7 +88,7 @@ char	**ft_split(char const *s, char c)
 		{
 			matrix[row] = get_word(s, c);
 			if (!matrix[row])
-				return (NULL);
+				return (clean_matrix(matrix, row));
 			row++;
 			while (*s && *s != c)
 				s++;

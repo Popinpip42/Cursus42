@@ -6,7 +6,7 @@
 /*   By: lsirpa-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 03:33:03 by lsirpa-g          #+#    #+#             */
-/*   Updated: 2023/09/20 23:59:21 by lsirpa-g         ###   ########.fr       */
+/*   Updated: 2023/09/22 02:28:19 by lsirpa-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,28 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_list;
 	t_list	*aux;
-	//t_list	*temp;
-	//t_list	*beggining; //pointer to the initial list
+	char	*content;
 
-	//beggining = lst;
 	new_list = NULL;
 	while (lst != NULL)
 	{
-		aux = ft_lstnew(f(lst->content));
+		content = f(lst->content);
+		aux = ft_lstnew(content);
 		if (!aux)
 		{
+			del(content);
 			ft_lstclear(&new_list, del);
-			ft_lstclear(&lst, free);
-			/*while (lst)
-			{
-				temp = lst->next;
-				del(lst->content);
-				free(lst);
-				lst = temp;
-			}*/
 			return (NULL);
 		}
 		ft_lstadd_back(&new_list, aux);
 		lst = lst->next;
 	}
-	//ft_lstclear(&beggining, del);
 	return (new_list);
 }
+/*	t_list	*beggining; //pointer to the initial list
+	beggining = lst;
+	ft_lstclear(&lst, free);
+*/
 /*
 void	*to_upper(void *content)
 {
